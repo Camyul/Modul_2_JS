@@ -26,16 +26,25 @@ function solve() {
         var categories = [];
 
         function listBooks(opt) {
+            let result = [];
             if (!opt) {
-                return books;
+                result = books;
             } else if (opt.category) {
-                let result = books.filter(function(book) { x => x.category === opt.category });
-                result = result.sort(x => x.ID);
-                return result;
+                books.filter(function(b) {
+                    if (b.category === opt.category) {
+                        result.push(b);
+                    }
+                });
             } else if (opt.author) {
-                let result = books.filter(function(book) { x => x.author === opt.author });
-                return result;
+                books.filter(function(b) {
+                    if (b.author === opt.author) {
+                        result.push(b);
+                    }
+                });
             }
+
+            result = result.sort(x => x.ID);
+            return result;
         }
 
         function addBook(book) {
