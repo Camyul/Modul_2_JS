@@ -6,6 +6,6 @@ function solve(name) {
         console.log('Not Work!');
 
     }
-    console.log(name.length);
+    console.log(Number.isNaN(name[0]));
 }
-solve(['Ivan', 'Itest21'])
+solve(['322', 'Itest21'])

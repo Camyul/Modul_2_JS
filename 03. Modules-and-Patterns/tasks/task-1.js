@@ -69,43 +69,57 @@ function solve() {
                 firstName: names[0],
                 lastName: names[1],
                 id,
-                homeworks: 0,
-                examResults: 0
+                homeworks: [0],
+                examResults: 0,
+                topScore: 0
 
             });
             return id;
         },
         getAllStudents: function() {
+            //deep copy ---- WORK !!!
+            /* return this.students.map(st => {
+                 return {
+                     firstname: st.firstName,
+                     lastname: st.lastName,
+                     id: st.id
+                 };
+             });*/
+
             let allStudents = [];
 
             this.students.forEach(function(student) {
                 allStudents.push({
-                    firstName: student.firstName,
-                    lastName: student.lastName,
+                    firstname: student.firstName,
+                    lastname: student.lastName,
                     id: student.id
                 })
             });
             return allStudents;
         },
         submitHomework: function(studentID, homeworkID) {
-            let existSt = false;
+            validateID(studentID);
+            validateID(homeworkID);
 
+            studentID = +studentID;
+            homeworkID = +homeworkID;
 
-            for (let i = 0, len = students.length; i < len; i += 1) {
-                if (students[i].id === studentID) {
-                    existSt = true;
-                    students[i].homeworks += 1;
-                    break;
-                }
+            if (studentID < 1 || studentID > this.students.length) {
+                throw new Error('Invalid student ID!');
             }
-            if (homeworkID <= 0) {
-                throw new Error('homeworkID is invalid');
+            if (homeworkID < 1 || homeworkID > this.presentations.length) {
+                throw new Error('Invalid homework ID!');
             }
-            if (!existSt) {
-                throw new Error('Sudent not exist');
+
+            let currSt = this.students[studentID - 1];
+            if (currSt.homeworks.indexOf(homeworkID) === -1) {
+                currSt.homeworks.push(homeworkID);
             }
+
+            return this;
         },
         pushExamResults: function(results) {
+
             if (!results) {
                 throw new Error('Result not exist');
             }
@@ -113,51 +127,58 @@ function solve() {
                 throw new Error('Result must be in array');
             }
 
+            if (results.length !== this.students.length) {
+                throw new Error('Hvanah li vi');
+            }
+
             for (let j = 0, len = results.length; j < len; j += 1) {
-                if (typeof result[j] !== 'object') {
-                    throw new Error('Student must be object contains id and score!');
-                }
-                if (!results[j].StudentID || !results[j].score) {
-                    throw new Error('Missing obj parametrs');
-                } else if (Number.isNaN.results[j].StudentID &&
-                    Number.isNaN.results[j].score) {
-                    throw new Error('Invalid result an exam');
-                }
-                if (results[j].StudentID <= 0) {
-                    throw new Error('Invalid student id!');
-                }
-            }
-            for (let i = 0, len = results.length; i < len - 1; i += 1) {
-                if (results[i].StudentID === results[i + 1].StudentID) {
-                    throw new Error('Invalid student id cannot be duplicate!');
-                }
-            }
-            for (let i = 0, len = students.length; i < len; i += 1) {
-                for (let j = 0, len = results.length; j < len; j += 1) {
-                    if (students[i].id === results[j].StudentID) {
+                let currStID = results[j].StudentID,
+                    currStScore = results[j].score;
 
-                        students[i].examResults = results[j].score
-                        break;
-                    }
+                validateID(currStID);
+
+                if (!Number(currStScore) && !isFinite(currStScore)) {
+                    throw new Error('Student score must be a valid number!');
                 }
 
+                if (currStID < 1 || currStID > this.students.length) {
+                    throw new Error('Invalid student ID!');
+                }
+                if (this.students[currStID - 1].examResults !== 0) {
+                    throw new Error('This student have score!');
+                }
+
+                this.students[currStID - 1].examResults = currStScore;
             }
+            return this;
         },
         getTopStudents: function() {
-            /* let topSt = [],
-                 topTenSt = [];
+            let topSt = [],
+                topTenSt = [];
 
-             topSt = getAllStudents();
-             for (let i = 0, len = topSt.length; i < len; i += 1) {
-                 topSt[i].topScore = (0.75 * topSt[i].score) + (0.25 * (topSt[i].homeworks / count))
-             }
-             topSt.sort(st => st.topScore);
-             for (let i = 0; i < 10; i += 1) {
-                 topTenSt[i].push(topSt[i]);
-             }
-             return topTenSt;*/
+            topSt = getAllStudents();
+            for (let i = 0, len = topSt.length; i < len; i += 1) {
+                topSt[i].topScore = (0.75 * topSt[i].score) + (0.25 * (topSt[i].homeworks.length / count))
+            }
+            topSt.sort(st => st.topScore);
+            for (let i = 0; i < 10; i += 1) {
+                topTenSt[i].push(topSt[i]);
+            }
+            return topTenSt;
         }
     };
+
+    function validateID(id) {
+        if (!id) {
+            throw new Error('Id connot be empty');
+        }
+        if (id % 1 !== 0) {
+            throw new Error('Id must be integer');
+        }
+        if (Number.isNaN(id)) {
+            throw new Error('Id must be number');
+        }
+    }
 
     function validatePresentations(pres) {
         if (!pres) {
@@ -187,6 +208,8 @@ function solve() {
     }
 
     function validateStName(fullName) {
+
+
         if (!fullName) {
             throw new Error('Names cannot be empty');
         } else if (typeof fullName !== 'string') {
