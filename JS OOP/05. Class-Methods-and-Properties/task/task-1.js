@@ -30,7 +30,40 @@ class LinkedList {
         return toStr;
     }
 
-    append(...elements) {
+    insert(...args) { //Add elements to index of LinkedList
+        let index = args.shift(0),
+            count = 0,
+            prevNode,
+            nextNode,
+            node = this.head;
+
+        if (index === 0) {
+            return this.prepend(...args);
+        }
+
+        while (node !== null) {
+            if (count === index - 1) {
+                prevNode = node;
+                nextNode = node.next;
+                break;
+            }
+            node = node.next;
+            count += 1;
+        }
+
+        for (let i = 0, len = args.length; i < len; i += 1) {
+            node = new listNode(args[i]);
+            prevNode.next = node;
+            prevNode = node;
+            this._length += 1;
+        }
+
+        prevNode.next = nextNode;
+
+        return this;
+    }
+
+    append(...elements) { //Add elements to end of LinkedList
         let listLength = this.length,
             node = new listNode(elements[0]),
             prevNode;
@@ -50,6 +83,31 @@ class LinkedList {
             prevNode = node;
             this._length += 1;
         }
+
+        return this;
+    }
+
+    prepend(...elements) { //Add elements to Start of LinkedList
+        let oldHeadNode,
+            node = new listNode(elements[0]),
+            prevNode;
+
+        if (this.length > 0) {
+            oldHeadNode = this.head;
+        }
+
+        this.head = node;
+        this._length += 1;
+        prevNode = node;
+
+        for (let i = 1, len = elements.length; i < len; i += 1) {
+            node = new listNode(elements[i]);
+            prevNode.next = node;
+            prevNode = node;
+            this._length += 1;
+        }
+
+        prevNode.next = oldHeadNode;
 
         return this;
     }
