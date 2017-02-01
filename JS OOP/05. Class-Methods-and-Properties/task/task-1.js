@@ -14,6 +14,28 @@ class LinkedList {
         this.head = null;
     }
 
+    //Return element in position at(index) or change it with value at(index, value)
+    at(index, value) {
+        let node = this.head,
+            count = 0;
+
+        while (node !== null) {
+
+            if (count === index) {
+                if (typeof value === 'undefined') {
+                    return node.value;
+                } else {
+                    node.value = value;
+                    return this;
+                }
+            }
+            node = node.next;
+            count += 1;
+        }
+
+    }
+
+    //Print like a Linked List
     toString() {
         let toStr = '',
             node = this.head;
@@ -30,7 +52,8 @@ class LinkedList {
         return toStr;
     }
 
-    insert(...args) { //Add elements to index of LinkedList
+    //Add elements to index of LinkedList
+    insert(...args) {
         let index = args.shift(0),
             count = 0,
             prevNode,
@@ -63,7 +86,8 @@ class LinkedList {
         return this;
     }
 
-    append(...elements) { //Add elements to end of LinkedList
+    //Add elements to end of LinkedList
+    append(...elements) {
         let listLength = this.length,
             node = new listNode(elements[0]),
             prevNode;
@@ -87,7 +111,8 @@ class LinkedList {
         return this;
     }
 
-    prepend(...elements) { //Add elements to Start of LinkedList
+    //Add elements to Start of LinkedList
+    prepend(...elements) {
         let oldHeadNode,
             node = new listNode(elements[0]),
             prevNode;
@@ -120,6 +145,7 @@ class LinkedList {
         return this.head.value;
     }
 
+
     get last() {
         let node = this.head,
             lastElem;
@@ -132,6 +158,7 @@ class LinkedList {
         return lastElem;
     }
 
+    //Last node in Linked List
     get lastNode() {
         let node = this.head,
             lastNode;
