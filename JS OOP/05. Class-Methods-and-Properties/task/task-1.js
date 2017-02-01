@@ -62,6 +62,19 @@ class LinkedList {
 
     }
 
+    //Symbol.iterator - for-of
+    [Symbol.iterator]() {
+        let node = this.head;
+
+        return {
+            next: () => ({
+                value: node.value,
+                done: !(node.next === null),
+                node: node.next
+            })
+        };
+    }
+
     //Print like a Array
     toArray() {
         let arr = [],
