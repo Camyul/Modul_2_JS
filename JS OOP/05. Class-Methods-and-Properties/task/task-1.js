@@ -62,6 +62,19 @@ class LinkedList {
 
     }
 
+    //Print like a Array
+    toArray() {
+        let arr = [],
+            node = this.head;
+
+        while (node !== null) {
+            arr.push(node.value);
+            node = node.next;
+        }
+
+        return arr;
+    }
+
     //Print like a Linked List
     toString() {
         let toStr = '',
