@@ -14,6 +14,33 @@ class LinkedList {
         this.head = null;
     }
 
+    //Remove element in position at(index)
+    removeAt(index) {
+        let node = this.head,
+            count = 0,
+            prevNode,
+            nextNode = node.next;
+
+        while (node !== null) {
+
+
+            if (count === index) {
+                if (prevNode) {
+                    prevNode.next = nextNode;
+                } else {
+                    this.head = nextNode;
+                }
+                this._length -= 1;
+                break;
+            }
+            prevNode = node;
+            node = node.next;
+            nextNode = node.next;
+            count += 1;
+        }
+        return node.value;
+    }
+
     //Return element in position at(index) or change it with value at(index, value)
     at(index, value) {
         let node = this.head,
