@@ -31,14 +31,54 @@ function solve() {
                     if (index > -1) {
                         this.products.splice(index, 1);
                     } else {
-                        throw new Error('shopingCart don\'t contain this product');
+                        throw new Error(`shopingCart don't contain this product`);
 
                     }
 
                     return this;
                 },
-                showCost: function() {},
-                showProductTypes: function() {},
+                showCost: function() {
+                    let sum = 0,
+                        len;
+
+                    if (this.products.length === 0) {
+                        return sum;
+                    }
+
+                    for (let i = 0, len = this.products.length; i < len; i += 1) {
+                        sum += this.products[i].price;
+                    }
+
+                    return sum;
+                },
+                showProductTypes: function() {
+                    let typesOfProducts = [];
+
+                    if (this.products.length === 0) {
+                        return typesOfProducts;
+                    }
+
+                    /*function checkExistType(prod) {
+
+                        for (let i = 0, len = this.products.length; i < len; i += 1) {
+                            if (prod.productType === typesOfProducts[i]) {
+                                return true;
+                            }
+                        }
+
+                        return false;
+                    }*/
+
+                    for (let i = 0, leng = this.products.length; i < leng; i += 1) {
+                        let type = this.products[i].productType;
+
+
+                        typesOfProducts.push(type)
+
+                    }
+                    //typesOfProducts = typesOfProducts.sort();
+                    return typesOfProducts;
+                },
                 getInfo: function() {}
             }
 
