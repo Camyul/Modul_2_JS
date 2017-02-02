@@ -52,34 +52,76 @@ function solve() {
                     return sum;
                 },
                 showProductTypes: function() {
-                    let typesOfProducts = [];
+                    let typesOfProducts = [],
+                        result = [];
 
                     if (this.products.length === 0) {
-                        return typesOfProducts;
+                        return result;
                     }
 
-                    /*function checkExistType(prod) {
-
-                        for (let i = 0, len = this.products.length; i < len; i += 1) {
-                            if (prod.productType === typesOfProducts[i]) {
-                                return true;
-                            }
-                        }
-
-                        return false;
-                    }*/
-
                     for (let i = 0, leng = this.products.length; i < leng; i += 1) {
+
                         let type = this.products[i].productType;
-
-
                         typesOfProducts.push(type)
 
                     }
-                    //typesOfProducts = typesOfProducts.sort();
-                    return typesOfProducts;
+
+                    typesOfProducts = typesOfProducts.sort();
+                    result.push(typesOfProducts[0]);
+
+                    for (let i = 1, len = typesOfProducts.length; i < len; i += 1) {
+                        if (typesOfProducts[i - 1] !== typesOfProducts[i]) {
+                            result.push(typesOfProducts[i]);
+                        }
+
+                    }
+
+                    return result;
                 },
-                getInfo: function() {}
+                getInfo: function() {
+
+                    function getElement(name, tprice, quantity) {
+                        let element = {
+                            name: name,
+                            totalCost: tprice,
+                            quantity: quantity
+                        }
+                        return element;
+                    }
+
+                    let infoObj = {
+                            products: [],
+                            totalPrice: function() {
+                                let result = 0;
+
+                                for (let i = 0, len = this.products.length; i < len; i += 1) {
+                                    result += this.products[i].price;
+                                }
+
+                                return result;
+                            }
+                        },
+                        sortedCart = this.products.sort(),
+                        element = getElement(sortedCart[0].name, sortedCart[0].price, 1);
+
+
+
+                    for (let i = 1, len = sortedCart.length; i < len; i += 1) {
+                        if (sortedCart[i - 1].name !== sortedCart[i].name) {
+                            infoObj.products.push(element);
+                            element = getElement(sortedCart[i].name, sortedCart[i].price, 1);
+                            if (i === len - 1) {
+                                infoObj.products.push(element);
+                            }
+                        } else {
+                            element.totalCost += sortedCart[i].price;
+                            element.quantity += 1;
+                        }
+                    }
+
+
+                    return infoObj;
+                }
             }
 
             return shopingCart;
