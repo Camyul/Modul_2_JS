@@ -17,7 +17,7 @@ function solve() {
     }
 
     function validateNumberRange(num, min, max) {
-        if (num < 2 || num > 40) {
+        if (typeof(num) !== 'number' && (num < min || num > max)) {
             throw Error("The number is not a valid!");
         }
     }
@@ -25,6 +25,12 @@ function solve() {
     function validateStringIsNull(str) {
         if (str === null) {
             throw Error('The string is Null');
+        }
+    }
+
+    function validateNumberIsbn(isbn) {
+        if (typeof(isbn) !== 'string' || !isbn.match(/^([0-9]{10}|[0-9]{13})$/)) {
+            throw Error('isbn is not valid');
         }
     }
 
@@ -50,14 +56,126 @@ function solve() {
             validateStringIsNull(description);
             this._description = description;
         }
+
+        get id() {
+            return this._id;
+        }
+    }
+
+    class Book extends Item {
+        constructor(name, isbn, genre, description) {
+            super(name, description);
+            this.isbn = isbn;
+            this.genre = genre;
+        }
+
+        get isbn() {
+            return this._isbn;
+        }
+        set isbn(value) {
+            validateNumberIsbn(value);
+            this._isbn = value;
+        }
+
+        get genre() {
+            return this._genre;
+        }
+        set genre(value) {
+            validateNumberRange(value, 2, 20);
+            this._genre = value;
+        }
+
+    }
+    class Media extends Item {
+
+        constructor(name, rating, duration, description) {
+            super(name, description);
+            this.rating = rating;
+            this.duration = duration;
+        }
+
+        get rating() {
+            return this._rating;
+        }
+        set rating(value) {
+            validateNumberRange(value, 1, 5);
+            this._rating = value;
+        }
+
+        get duration() {
+            return this._duration;
+        }
+        set duration(value) {
+            validateNumberRange(value, 0, Number.MAX_SAFE_INTEGER);
+            this._duration = value;
+        }
+    }
+
+    class Catalog {
+        constructor(name) {
+            this._id = getNextId();
+            this.name = name;
+            this._items = [];
+        }
+
+        get name() {
+            return this._name;
+        }
+        set name(value) {
+            validateNumberRange(value, 2, 40);
+            this._name = value;
+        }
+
+        get id() {
+            return this._id;
+        }
+
+        get items() {
+            return this._items;
+        }
+
+        add(...items) {
+            if (Array.isArray(items[0])) {
+                this._items = items[0];
+            }
+
+            if (items === null) {
+                throw Error('At least one item')
+            }
+
+            items.forEach(item => {
+                if (typeof(item) !== 'object') {
+                    throw Error('item must be object');
+                }
+
+                validateStringLenght(item.name, 2, 40);
+                validateNumberRange(item.id, 0, Number.MAX_SAFE_INTEGER);
+                validateStringIsNull(item.description);
+            });
+
+            this._items.push(...items);
+            // items.forEach(item => this._items.push(item));
+
+            return this;
+        }
+
+        find(id) {
+            if (typeof id !== 'number') {
+                throw Error('id must be a number');
+            }
+
+            return this._items.find(item => item.id === id) || null;
+        }
     }
 
     return {
         getBook: function(name, isbn, genre, description) {
-            // return a book instance
+            //return a book instance
+            return new Book(name, isbn, genre, description);
         },
         getMedia: function(name, rating, duration, description) {
             // return a media instance
+            return new Media(name, rating, duration, description)
         },
         getBookCatalog: function(name) {
             // return a book catalog instance
