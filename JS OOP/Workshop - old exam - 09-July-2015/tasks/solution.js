@@ -34,6 +34,12 @@ function solve() {
         }
     }
 
+    function validateStringIsEmptyOrNull(str) {
+        if (str === null || str === '') {
+            throw Error('str cannot be empty or null');
+        }
+    }
+
     class Item {
         constructor(name, description) {
             this.name = name;
@@ -159,12 +165,42 @@ function solve() {
             return this;
         }
 
-        find(id) {
-            if (typeof id !== 'number') {
-                throw Error('id must be a number');
+        find(arg) {
+            if (typeof arg === 'object') {
+                return findByOption.call(this, arg);
+            }
+            return findById.call(this, arg)
+
+            function findById(id) {
+                if (typeof id !== 'number') {
+                    throw Error('id must be a number');
+                }
+
+                return this._items.find(item => item.id === id) || null;
             }
 
-            return this._items.find(item => item.id === id) || null;
+            function findByOption(option) {
+                return this._items.filter(item => {
+                    return (
+                        (option.name === item.name && option.id === item.id));
+                });
+            }
+
+            /*function findByOptions(options) {      //Cuki's solution
+				return this._items.filter(item => {
+					return (
+						(!options.hasOwnProperty('name') || item.name === options.name)
+					 && (!options.hasOwnProperty('id') || item.id === options.id));
+				});
+			}*/
+        }
+        search(pattern) {
+            validateStringIsEmptyOrNull(pattern);
+
+            return this._items.filter(item => {
+                return (item.name.indexOf('pattern') >= 0 ||
+                    item.description.indexOf('pattern') >= 0)
+            });
         }
     }
 
