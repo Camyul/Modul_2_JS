@@ -35,7 +35,7 @@ function solve() {
     }
 
     function validateStringIsEmptyOrNull(str) {
-        if (str === null || str === '') {
+        if (typeof str !== 'string' || str === '') {
             throw Error('str cannot be empty or null');
         }
     }
@@ -44,7 +44,7 @@ function solve() {
         constructor(name, description) {
             this.name = name;
             this.description = description;
-            this.id = getNextId();
+            this._id = getNextId();
         }
 
         get name() {
@@ -127,9 +127,9 @@ function solve() {
         get name() {
             return this._name;
         }
-        set name(value) {
-            validateNumberRange(value, 2, 40);
-            this._name = value;
+        set name(name) {
+            validateStringLenght(name, 2, 40);
+            this._name = name;
         }
 
         get id() {
@@ -142,21 +142,22 @@ function solve() {
 
         add(...items) {
             if (Array.isArray(items[0])) {
-                this._items = items[0];
+                items = items[0];
             }
 
-            if (items === null) {
+            if (items.length === 0) {
                 throw Error('At least one item')
             }
 
             items.forEach(item => {
-                if (typeof(item) !== 'object') {
+                if (typeof item !== 'object') {
                     throw Error('item must be object');
                 }
 
+                validateStringIsEmptyOrNull(item.name);
                 validateStringLenght(item.name, 2, 40);
                 validateNumberRange(item.id, 0, Number.MAX_SAFE_INTEGER);
-                validateStringIsNull(item.description);
+                validateStringIsEmptyOrNull(item.description);
             });
 
             this._items.push(...items);
@@ -179,27 +180,27 @@ function solve() {
                 return this._items.find(item => item.id === id) || null;
             }
 
-            function findByOption(option) {
+            /*function findByOption(option) {
                 return this._items.filter(item => {
                     return (
                         (option.name === item.name && option.id === item.id));
                 });
-            }
+            }*/
 
-            /*function findByOptions(options) {      //Cuki's solution
-				return this._items.filter(item => {
-					return (
-						(!options.hasOwnProperty('name') || item.name === options.name)
-					 && (!options.hasOwnProperty('id') || item.id === options.id));
-				});
-			}*/
+            function findByOptions(options) { //Cuki's solution
+                return this._items.filter(item => {
+                    return (
+                        (!options.hasOwnProperty('name') || item.name === options.name) &&
+                        (!options.hasOwnProperty('id') || item.id === options.id));
+                });
+            }
         }
         search(pattern) {
             validateStringIsEmptyOrNull(pattern);
 
             return this._items.filter(item => {
-                return (item.name.indexOf('pattern') >= 0 ||
-                    item.description.indexOf('pattern') >= 0)
+                return (item.name.indexOf(pattern) >= 0 ||
+                    item.description.indexOf(pattern) >= 0)
             });
         }
     }
@@ -227,7 +228,7 @@ function solve() {
         }
 
         getGenres() {
-            this.items
+            return this._items
                 .map(book => book.genre.toLowerCase())
                 .sort()
                 .filter((genre, index, genres) => genre !== genres[index - 1]);
@@ -235,12 +236,73 @@ function solve() {
 
         find(arg) {
             if (typeof arg === 'object') {
-                let books = super.fimd(arg);
-                if (arg.hasOwnProperty(genre)) {
+                let books = super.find(arg);
+                if (arg.hasOwnProperty('genre')) {
                     return books.filter(book => book.genre === arg.genre);
                 }
                 return books;
             }
+            return super.find(arg);
+        }
+    }
+
+    class MediaCatalog extends Catalog {
+        constructor(name) {
+            super(name);
+        }
+
+        add(...medias) {
+            if (Array.isArray(medias[0])) {
+                medias = medias[0];
+            }
+
+            medias.forEach(media => {
+                if (typeof media !== 'object') {
+                    throw Error('wrong media type');
+                }
+
+                validateNumberRange(media.duration, 0, Number.MAX_SAFE_INTEGER);
+                validateNumberRange(media.rating, 1, 5);
+            });
+
+            return super.add(medias);
+        }
+
+        getTop(count) {
+            validateNumberRange(count, 0, Number.MAX_SAFE_INTEGER);
+
+            return this._items
+                .slice()
+                .sort((x, y) => x.rating - y.rating)
+                .slice(0, count)
+                .map(x => {
+                    return {
+                        name: x.name,
+                        id: x.id
+                    };
+                });
+        }
+
+        getSortedByDuration() {
+            return this._items
+                .slice()
+                .sort((x, y) => {
+                    if (x.duration === y.duration) {
+                        return x.id - y.id;
+                    }
+                    return x.duration - y.duration;
+                });
+        }
+
+        find(arg) {
+            if (typeof arg === 'object') {
+                const medias = super.find(arg);
+                if (arg.hasOwnProperty('rating')) {
+                    return medias.filter(media => media.rating === arg.rating);
+                }
+                return medias;
+            }
+
             return super.find(arg);
         }
     }
@@ -260,6 +322,7 @@ function solve() {
         },
         getMediaCatalog: function(name) {
             // return a media catalog instance
+            return new MediaCatalog(name);
         }
     };
 }
