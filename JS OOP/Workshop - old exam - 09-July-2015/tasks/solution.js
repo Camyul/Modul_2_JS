@@ -204,6 +204,47 @@ function solve() {
         }
     }
 
+    class BookCatalog extends Catalog {
+        constructor(name) {
+            super(name);
+        }
+
+        add(...books) {
+            if (Array.isArray(books[0])) {
+                books = books[0];
+            }
+
+            books.forEach(book => {
+                if (typeof book !== 'object') {
+                    throw Error('book must be a object');
+                }
+
+                validateNumberIsbn(book.isbn);
+                validateNumberRange(book.genre, 2, 20);
+            });
+
+            return super.add(books);
+        }
+
+        getGenres() {
+            this.items
+                .map(book => book.genre.toLowerCase())
+                .sort()
+                .filter((genre, index, genres) => genre !== genres[index - 1]);
+        }
+
+        find(arg) {
+            if (typeof arg === 'object') {
+                let books = super.fimd(arg);
+                if (arg.hasOwnProperty(genre)) {
+                    return books.filter(book => book.genre === arg.genre);
+                }
+                return books;
+            }
+            return super.find(arg);
+        }
+    }
+
     return {
         getBook: function(name, isbn, genre, description) {
             //return a book instance
@@ -211,10 +252,11 @@ function solve() {
         },
         getMedia: function(name, rating, duration, description) {
             // return a media instance
-            return new Media(name, rating, duration, description)
+            return new Media(name, rating, duration, description);
         },
         getBookCatalog: function(name) {
             // return a book catalog instance
+            return new BookCatalog(name);
         },
         getMediaCatalog: function(name) {
             // return a media catalog instance
