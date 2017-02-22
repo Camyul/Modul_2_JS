@@ -19,8 +19,8 @@ function solve() {
             if (array[i][attr] === value) {
                 return i;
             }
-            return -1;
         }
+        return -1;
     }
 
     const generatorID = getID();
@@ -84,22 +84,24 @@ function solve() {
                 return null;
             }
 
-            return this;
+            return findedPlayList;
         }
 
         removePlaylist(opt) {
             let findId;
             if (typeof opt !== 'number') {
                 findId = opt.id;
+            } else {
+                findId = opt;
             }
 
-            let index = findWithAttr(this.playlists, id, findId);
+            let index = findWithAttr(this.playlists, 'id', findId);
 
             if (index === -1) {
-                throw new Error(`Playlist with ID ${id} not found`);
+                throw new Error(`Playlist with ID ${findId} not found`);
             }
 
-            this.playlists.splice(i, 1);
+            this.playlists.splice(index, 1);
             return this;
         }
 
@@ -114,15 +116,32 @@ function solve() {
                 throw new Error(`Playlist is smallest`);
             }
 
+            if (page * size + size < len) {
+                len = page * size + size;
+            }
+
             for (i = page * size; i < len; i += 1) {
                 result.push(this.playlists[i]);
             }
+
+            result = result
+                .sort((x, y) => {
+                    if (x.title === y.title) {
+                        return x.id - y.id;
+                    }
+                    return x.title;
+                });
 
             return result;
         }
 
         contains(playable, playlist) {
-            return this;
+            let index = this.playlists.findIndex(p => Validator.validateIstance(['title', 'author'], p));
+
+            if (index < 0) {
+                return false;
+            }
+            return true;
         }
 
         search(pattern) {
@@ -159,23 +178,68 @@ function solve() {
         }
 
         addPlayable(playable) {
+            this.playable.push(playable);
+
             return this;
         }
 
         getPlayableById(id) {
-            return this;
+            let findedPlayList = this.playable.find(p => p.id === id);
+
+            if (typeof findedPlayList === 'undefined') {
+                return null;
+            }
+            return findedPlayList;
         }
 
-        removePlayable(id) {
-            return this;
-        }
+        removePlayable(opt) {
+            let findId;
+            if (typeof opt !== 'number') {
+                findId = opt.id;
+            } else {
+                findId = opt;
+            }
 
-        removePlayable(playable) {
+            let index = findWithAttr(this.playable, 'id', findId);
+
+            if (index === -1) {
+                throw new Error(`Playable with ID ${findId} not found`);
+            }
+
+            this.playable.splice(index, 1);
+
             return this;
         }
 
         listPlayables(page, size) {
-            return this;
+            let len = this.playable.length,
+                i,
+                result = [];
+            Validator.validateIntegerBiggestOfZero(page);
+            Validator.validateIntegerBiggestOfZero(size);
+
+            if (len < page * size) {
+                throw new Error(`Playable is smallest`);
+            }
+            if (page * size + size < len) {
+                len = page * size + size;
+            }
+
+            for (i = page * size; i < len; i += 1) {
+                result.push(this.playable[i]);
+            }
+
+            result = result
+                .sort((x, y) => {
+                    if (x.title === y.title) {
+                        return x.id - y.id;
+                    }
+                    return x.title;
+                });
+
+            return result;
+
+
         }
     }
 
