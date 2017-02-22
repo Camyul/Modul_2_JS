@@ -53,7 +53,7 @@ function solve() {
             }
         },
         validatePositiveInteger(num, name) {
-            if (num < 1 || typeof num !== 'number' || num !== (num | 0)) {
+            if (num < 0 || typeof num !== 'number' || num !== (num | 0) ||  Number.isNaN(num)) {
                 throw new Error(`${name} must be a positive integer number!`);
             }
         },
@@ -65,8 +65,18 @@ function solve() {
         },
 
         validatePositiveValue(num, name, maxValue) {
-            if (typeof num !== 'number' && (num < 0 || num > maxValue)) {
+            if (typeof num !== 'number' && (num < 0 || num > maxValue || Number.isNaN(num))) {
                 throw new Error(`${name} must be a positive number that is at most ${maxValue}!`)
+            }
+        },
+
+        validateValidEffect(effect){
+            if (typeof effect !== 'function' || effect.length !== 1) {
+                throw new Error(`Effect must be a function with 1 parameter!`);
+            }
+
+            if (effect === null) {
+                throw new Error(`Passed objects must be Spell-like objects!`);
             }
         }
 
@@ -103,13 +113,10 @@ function solve() {
             return this._effect;
         }
         set effect(effect) {
-            if (effect === null) {
-                throw new Error(`Passed objects must be Spell-like objects!`);
-            }
+            Validator.validateValidEffect(effect);
 
-            if (typeof effect !== 'function') {
-                throw new Error(`Effect must be a function with 1 parameter!`);
-            }
+            this._effect = effect;
+            
         }
     }
 
@@ -212,6 +219,8 @@ function solve() {
         }
     }
 
+
+
     class BattleManager {
         constructor() {
             this._commanders = [];
@@ -223,12 +232,10 @@ function solve() {
         }
 
         getArmyUnit(opt) {
-            if (opt) {
+       
                 return new ArmyUnit(opt.name, opt.alignment, opt.damage,
                     opt.health, opt.count, opt.speed);
-            } else {
-                return;
-            }
+          
         }
 
         getSpell(name, manaCost, effect) {
@@ -253,13 +260,30 @@ function solve() {
         }
 
         addSpellsTo(commanderName, ...spells) {
-            let commander = this._commanders.find(x => x.name === commanderName);
+            /*let commander = this._commanders.find(x => x.name === commanderName);
             if (commander === undefined) {
                 throw new Error(`No such commander`);
-            }
-
+            };
 
             commander.spellbook.push(...spells);
+            return this;*/
+
+            let commander = this._commanders.find(c => c.name === commanderName);
+
+            if (commander === undefined) {
+                throw new Error(`No such commander`);
+            };
+
+
+            try {
+                this._commanders.find(c => c.name === commanderName)
+            .spellbook.push(...spells.map(s => new Spell(s.name, s.manaCost, s.effect)));
+
+           
+            }
+            catch(e){
+                throw new Error(`Passed objects must be Spell-like objects!`)
+            }
             return this;
         }
 
@@ -267,7 +291,24 @@ function solve() {
 
             //query is an object that can have properties name and/or alignment
             //returns all commanders that have the same values of the passed properties
-            return this._commanders
+
+            
+                /*Array.prototype.filterByProperty = function(quer, nameProp){
+                    if (!quer.hasOwnProperty('nameProp')) {
+                        return this;
+                    }
+
+                    const findObj = quer[nameProp];
+                    this.filter(x => x[nameProp] === findObj);
+                }
+
+             return this._commanders
+                                .slice()
+                                .filterByProperty(query, 'name')
+                                .filterByProperty(query, 'alignment')
+                                .sort(x => x.name);*/
+
+        return this._commanders       //Work
                 .filter(commander => Object.keys(query).every(prop => query[prop] === commander[prop]));
         }
 
@@ -281,52 +322,61 @@ function solve() {
         //query is an object that can have properties id, name, alignment
         //returns an array of all ArmyUnits in the Battlemanager that have the same values for the passed properties
         findArmyUnits(query) {
-            return this._army_units
+            /*return this._army_units
+                .filter(army => Object.keys(query).every(prop => query[prop] === army[prop]));*/
+                let armyUnits = this._army_units
                 .filter(army => Object.keys(query).every(prop => query[prop] === army[prop]));
+
+                armyUnits = armyUnits.sort((x, y) => y.speed - x.speed); //Sort Descending
+                return armyUnits;
         }
 
         spellcast(casterName, spellName, targetUnitId) {
             let commander = this._commanders.find(c => c.name === casterName);
             if (commander === undefined) {
-                throw new Error(`Can\'t cast with non-existant commander ${casterName}!`)
+                throw new Error(`Can't cast with non-existant commander ${casterName}!`)
             };
 
             let spell = commander.spellbook.find(s => s.name === spellName);
             if (spell === undefined) {
-                throw new Error(`${casterName} does not know ${spellName}`)
+                throw new Error(`${casterName} doesn't know ${spellName}`)
             }
 
             if (commander.mana < spell.manaCost) {
                 throw new Error(`Not enough mana!`);
             }
 
-            let army = this._army_units.find(a => a.id === targetUnitId);
-            if (army === undefined) {
+            let unit = this._army_units.find(u => u.id === targetUnitId);
+            if (unit === undefined) {
                 throw new Error(`Target not found!`);
             }
 
+
             commander.mana -= spell.manaCost;
 
-            //spell.effect(targetUnitId);
+            spell.effect(unit);
 
             return this;
         }
 
         battle(attacker, defender) {
-            if (attacker === null || defender === null) {
-                throw new Error(`Nee na men`);
-            }
+            const properties = ['name', 'alignment', 'damage', 'health', 'count', 'speed'];
+
+            [attacker, defender].forEach(unit => properties.forEach(p => {
+                if (typeof unit[p] === 'undefined') {
+                    throw new Error('Battle participants must be ArmyUnit-like!');
+                }
+            }));
 
             let attackerTotalDamage = attacker.damage * attacker.count,
                 defenderTotalHealth = defender.health * defender.count;
 
             defenderTotalHealth -= attackerTotalDamage;
 
-            defender.count = Math.ceil(defenderTotalHealth / defender.health);
-
-            if (defender.count < 0) {
-                defender.count = 0;
-            }
+            let newCount = Math.ceil(defenderTotalHealth / defender.health);
+            
+            defender.count = newCount < 0 ? 0 : newCount;
+            
 
             return this;
         }
