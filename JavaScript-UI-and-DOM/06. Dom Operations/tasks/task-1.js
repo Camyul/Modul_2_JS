@@ -33,10 +33,9 @@ module.exports = function() {
                 }
             },
 
-            validateSelectedByID(id) {
-                let item = document.getElementById(id);
+            validateDomElement(domEl) {
 
-                if (item === null) {
+                if (domEl === null) {
                     throw new Error('Element not exist!');
                 }
             },
@@ -45,46 +44,43 @@ module.exports = function() {
                 if (!Array.isArray(items)) {
                     throw new Error('Must be a Array!');
                 }
+                for (let i = 0, len = items.length; i < len; i += 1) {
+
+                    if (typeof items[i] !== 'string' && typeof items[i] !== 'number') {
+                        throw new Error('Must be a String or Numbrer');
+                    }
+                }
             }
         }
 
         Validator.validateStringExist(element);
         Validator.validateArray(contents);
         Validator.validateParams(element, contents);
-        //Validator.validateSelectedByID(element);
 
-        let wrapper = document.getElementById(element),
+        let domElement,
             docFrag = document.createDocumentFragment();
 
-        if (wrapper !== null) {
-            for (let i = 0, len = contents.length; i < len; i += 1) {
-                let item = document.createElement(contents[i])
-                docFrag.appendChild(item);
-            }
+        if (typeof element === 'string') {
+            domElement = document.getElementById(element);
 
-            wrapper.innerHTML = '';
-            wrapper.appendChild(docFrag);
-
+            Validator.validateDomElement(domElement);
         } else {
 
-            // wrapper = document.getElementsByName(element);
-            // if (wrapper === null) {
-            //throw new Error('test');
-            // }
-
-            for (let i = 0, len = contents.length; i < len; i += 1) {
-                let item = document.createElement(contents[i])
-                docFrag.appendChild(item);
-            }
-            document.body.innerHTML = '';
-            document.body.appendChild(docFrag);
-
+            domElement = element;
         }
 
 
 
+        let div = document.createElement('div');
+        domElement.innerHTML = '';
+        for (let i = 0, len = contents.length; i < len; i += 1) {
 
+            let item = div.cloneNode(true);
+            item.innerHTML = contents[i];
+            docFrag.appendChild(item);
+        }
 
+        domElement.appendChild(docFrag);
 
     };
 };
