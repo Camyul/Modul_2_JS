@@ -1,56 +1,57 @@
 function solve() {
     return function(selector) {
-        var i,
-            domElement,
-            allButtons,
-            allButtonsLength,
-            currButton;
+        let container,
+            buttons;
 
         if (typeof selector !== 'string' && selector.nodeType != 1) {
-            throw new Error();
+            throw new Error('Selector wrong type!');
         }
 
-        if (typeof selector === 'string') {
-            domElement = document.getElementById(selector);
+        if (typeof selector === 'string' || typeof selector === 'number') {
+            container = document.getElementById(selector);
 
-            if (!domElement) {
-                throw new Error();
+            if (!container) {
+                throw new Error('Element not exist!');
             }
 
         } else {
-            domElement = selector;
+            container = selector;
         }
 
-        allButtons = domElement.querySelectorAll('.button');
-        allButtonsLength = allButtons.length;
 
-        for (i = 0; i < allButtonsLength; i += 1) {
-            currButton = allButtons.item(i);
-            currButton.textContent = 'hide';
-        }
+        buttons = container.getElementsByClassName('button');
 
-        domElement.addEventListener('click', onElementClick, false);
+        [].forEach.call(buttons, x => x.innerHTML = 'hide');
 
-        function onElementClick(event) {
-            var nextElement,
-                clickedButton;
+        container.addEventListener('click', onButtonClick, false);
 
-            if (event.target.className == 'button') {
-                clickedButton = event.target;
-                nextElement = clickedButton.nextElementSibling;
+        function onButtonClick(ev) {
+            let clickedButton,
+                nextElement;
 
-                if (nextElement.className == 'content' && nextElement.nextElementSibling.className == 'button') {
-                    if (nextElement.style.display != 'none') {
+
+            if (ev.target.className === 'button') {
+                clickedButton = ev.target;
+                //nextElement = ev.target.nextElementSibling;
+
+                if (clickedButton.nextElementSibling.className !== 'content') {
+                    nextElement = ev.target.nextElementSibling;
+                    nextElement = nextElement.nextElementSibling;
+                } else {
+                    nextElement = ev.target.nextElementSibling;
+                }
+                //console.log(nextElement);
+                if (nextElement.className === 'content') {
+                    if (nextElement.style.display !== 'none') {
                         nextElement.style.display = 'none';
                         clickedButton.innerHTML = 'show';
                     } else {
-                        nextElement.style.display = '';
                         clickedButton.innerHTML = 'hide';
+                        nextElement.style.display = '';
                     }
                 }
             }
-        }
-
+        };
     };
 }
 
