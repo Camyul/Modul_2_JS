@@ -11,7 +11,14 @@ function solve() {
 
             searchControls,
             labelSearch,
-            ipSearch;
+            ipSearch,
+
+            resultControls,
+            listResults,
+            listItemsTemplate,
+            btnDeleteListItem,
+            textListItemStrong,
+            listItems;
 
         if (isCaseSensitive !== true) {
             isCaseSensitive = false;
@@ -53,7 +60,7 @@ function solve() {
         searchControls.className = 'search-controls';
 
         labelSearch = document.createElement('label');
-        labelSearch.innerHTML = 'searrch';
+        labelSearch.innerHTML = 'search';
 
         ipSearch = document.createElement('input');
         ipSearch.addEventListener('click', onSearchTextboxInput, false);
@@ -65,23 +72,77 @@ function solve() {
 
         /* Result Controls START*/
 
+        resultControls = document.createElement('div');
+        resultControls.className = 'result-controls';
+
+        listResults = document.createElement('ul');
+        listResults.className = 'items-list';
+
+        listItemsTemplate = document.createElement('li');
+        listItemsTemplate.className = 'list-item';
+
+        btnDeleteListItem = document.createElement('a');
+        btnDeleteListItem.className = 'button button-delete';
+        btnDeleteListItem.innerHTML = "X";
+
+        textListItemStrong = document.createElement('string');
+        listItemsTemplate.appendChild(btnDeleteListItem);
+        listItemsTemplate.appendChild(textListItemStrong);
+
+        listResults.addEventListener('click', onListResultClick, false);
+
+        resultControls.appendChild(listResults);
+
+        //listItems = document.getElementsByClassName('list-item');
+
         /* Result Controls END*/
 
         fragment.appendChild(addControls);
         fragment.appendChild(searchControls);
+        fragment.appendChild(resultControls);
 
         element.appendChild(fragment);
         element.className += 'items-control';
 
+        //Запазване на въведената стойност в input-a и зачистването му
         function onAddButtonClick() {
             let value = ipAdd.value;
             ipAdd.value = '';
 
+            textListItemStrong.innerHTML = value;
 
+            listResults.appendChild(listItemsTemplate.cloneNode(true));
         };
 
         function onSearchTextboxInput() {
 
+        };
+
+        //Изтриване на parrent-a на кликнатия елемент
+        function onListResultClick(ev) {
+            let btn = ev.target,
+                parent;
+
+            if (btn.className.indexOf('button-delete') < 0) {
+                return;
+            }
+
+            parent = btn;
+            while (parent && parent.className.indexOf('list-item') < 0) {
+                //console.log(parent.nodeName);
+                console.log(parent);
+                //console.log(parent.className);
+                console.log(parent.parentNode);
+                //console.log(parent.parentNode.className);
+
+                parent = parent.parentNode;
+            }
+
+            if (!parent) {
+                return;
+            }
+
+            listResults.removeChild(parent);
         };
     };
 }
