@@ -63,7 +63,7 @@ function solve() {
         labelSearch.innerHTML = 'search';
 
         ipSearch = document.createElement('input');
-        ipSearch.addEventListener('click', onSearchTextboxInput, false);
+        ipSearch.addEventListener('input', onSearchTextboxInput, false);
 
         labelSearch.appendChild(ipSearch);
         searchControls.appendChild(labelSearch);
@@ -85,7 +85,7 @@ function solve() {
         btnDeleteListItem.className = 'button button-delete';
         btnDeleteListItem.innerHTML = "X";
 
-        textListItemStrong = document.createElement('string');
+        textListItemStrong = document.createElement('strong');
         listItemsTemplate.appendChild(btnDeleteListItem);
         listItemsTemplate.appendChild(textListItemStrong);
 
@@ -93,7 +93,9 @@ function solve() {
 
         resultControls.appendChild(listResults);
 
-        //listItems = document.getElementsByClassName('list-item');
+        listItems = element.getElementsByClassName('list-item');
+
+
 
         /* Result Controls END*/
 
@@ -115,7 +117,28 @@ function solve() {
         };
 
         function onSearchTextboxInput() {
+            let i,
+                len,
+                text,
+                pattern = ipSearch.value;
 
+            if (!isCaseSensitive) {
+                pattern = pattern.toLowerCase();
+            };
+            console.log(listItems);
+            for (i = 0, len = listItems.length; i < len; i += 1) {
+                text = listItems[i].getElementsByTagName('strong')[0].innerHTML;
+
+                if (!isCaseSensitive) {
+                    text = text.toLowerCase();
+                }
+
+                if (text.indexOf(pattern) < 0) { //Не отговаря на търсенето
+                    listItems[i].style.display = 'none';
+                } else {
+                    listItems[i].style.display = '';
+                }
+            }
         };
 
         //Изтриване на parrent-a на кликнатия елемент
