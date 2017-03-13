@@ -1,0 +1,12 @@
+#root {
+    width: 20%;
+    height: 90%;
+    border-radius: 20px;
+    box-shadow: 1px 1px 10px red;
+    background: cyan;
+}
+
+div {
+    margin-left: 20px;
+    padding-bottom: 10px;
+}
