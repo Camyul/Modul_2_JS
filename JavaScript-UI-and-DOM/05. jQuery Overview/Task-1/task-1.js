@@ -1,18 +1,21 @@
 function solve() {
     return function(selector, count) {
-        let $element = $(selector),
+        var $element = $(selector),
             $ulTemplate,
             tempElement,
             $liTemplate;
 
-        if (Number.isNaN(count)) {
-            throw new Error('Count must be a number');
+        if (typeof selector !== 'string') {
+            throw new Error('Selector must be a string');
         }
 
-        if (count === null || count < 1) {
-            throw new Error('Count is missing or negative');
+        if (!Number(count) || Number(count) < 1) {
+            throw new Error('Count must be a number or negative');
         }
 
+        if (!$(selector).length) {
+            return this;
+        }
 
         tempElement = document.createElement('ul');
 
@@ -22,7 +25,7 @@ function solve() {
 
         tempElement = document.createElement('li');
 
-        for (let i = 0; i < count; i += 1) {
+        for (var i = 0; i < Number(count); i += 1) {
             $liTemplate = $(tempElement.cloneNode(true))
                 .addClass('list-item')
                 .html(`List item #${i}`)
