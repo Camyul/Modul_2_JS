@@ -10,3 +10,7 @@ div {
     margin-left: 20px;
     padding-bottom: 10px;
 }
+
+.hidden {
+    display: none;
+}

@@ -17,30 +17,27 @@ function solve() {
             .on('click', onButtonClick);
         //console.log($buttons);
 
-        function onButtonClick(ev) {
-            let clickedButton = ev.target,
-                nextElement = clickedButton.nextElementSibling;
-            if (nextElement.clasName !== 'content') {
-                //console.log(nextElement);
+        function onButtonClick() {
+            let $this = $(this),
+                $node = $this.next();
 
-                nextElement = nextElement.nextElementSibling;
-                //console.log(nextElement);
+            if ($node.is('br')) {
+                $node = $node.next();
             }
-            // console.log(nextElement);
 
-
-            if (clickedButton.innerHTML === 'hide') {
-                clickedButton.innerHTML = 'show';
-
-                nextElement.style.display = 'none';
-                // console.log(clickedButton.nextElementSibling);
-
+            if ($node.hasClass('hidden')) {
+                $node.removeClass('hidden');
+                if ($node.prev().is('br')) {
+                    $node = $node.prev();
+                }
+                $node.prev().html('hide');
             } else {
-                clickedButton.innerHTML = 'hide';
-
-                nextElement.style.display = '';
+                $node.addClass('hidden');
+                if ($node.prev().is('br')) {
+                    $node = $node.prev();
+                }
+                $node.prev().html('show');
             }
-
         }
     };
 }
