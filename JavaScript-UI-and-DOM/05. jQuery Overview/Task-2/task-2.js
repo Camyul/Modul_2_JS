@@ -1,15 +1,15 @@
 function solve() {
     return function(selector) {
-        let $element,
+        var $element,
             $buttons;
 
-        if (typeof selector === 'string') {
-            $element = $(selector);
-        } else if (selector instanceof $) {
-            $element = selector;
-        } else {
-            throw new Error('Wrong selector');
-        };
+        if (typeof selector !== 'string' || $(selector).length < 1) {
+            throw new Error('Wrong input');
+        }
+
+
+        $element = $(selector);
+
 
         $buttons = $('.button')
             .html('hide')
@@ -18,26 +18,19 @@ function solve() {
         //console.log($buttons);
 
         function onButtonClick() {
-            let $this = $(this),
-                $node = $this.next();
+            var $this = $(this),
+                $nextContent = $this.nextAll('.content').first(),
+                $nextButton = $nextContent.nextAll('.button').first();
 
-            if ($node.is('br')) {
-                $node = $node.next();
-            }
-
-            if ($node.hasClass('hidden')) {
-                $node.removeClass('hidden');
-                if ($node.prev().is('br')) {
-                    $node = $node.prev();
+            if ($nextButton.length && $nextContent.length) {
+                if ($nextContent.css('display') === 'none') {
+                    $nextContent.css('display', '');
+                    $this.text('hide');
+                } else {
+                    $nextContent.css('display', 'none');
+                    $this.text('show');
                 }
-                $node.prev().html('hide');
-            } else {
-                $node.addClass('hidden');
-                if ($node.prev().is('br')) {
-                    $node = $node.prev();
-                }
-                $node.prev().html('show');
             }
-        }
+        };
     };
 }
