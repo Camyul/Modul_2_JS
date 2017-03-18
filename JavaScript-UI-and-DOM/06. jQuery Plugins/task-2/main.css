@@ -1,0 +1,32 @@
+.color-picker-icon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.close-btn {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.color-palette {
+    border-radius: 50px;
+}
+
+.input-HEX,
+.input-RGB {
+    width: 120px;
+}
+
+.input-color {
+    width: 115px;
+    height: 50px;
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
