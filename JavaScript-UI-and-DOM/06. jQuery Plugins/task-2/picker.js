@@ -1,7 +1,17 @@
 $.fn.colorpicker = function() {
     let $root = $(this),
         $colorPickerPanel,
-        $startIcon;
+        $startIcon,
+        $closeBtn,
+        $colopPalette,
+        $inputHEX,
+        $inputRGB,
+        $inputColor,
+        canvas,
+        ctx;
+
+    canvas = document.createElement('canvas');
+    ctx = canvas.getContext('2d');
 
     $root.css('width', '42px')
         .css('height', '42px')
@@ -45,7 +55,7 @@ $.fn.colorpicker = function() {
         .css('position', 'absolute')
         .css('top', '262px')
         .css('left', '-97px')
-        .val('HEX')
+        .attr('placeholder', 'HEX')
         .appendTo($colorPickerPanel);
 
     $inputRGB = $('<input/>')
@@ -53,7 +63,7 @@ $.fn.colorpicker = function() {
         .css('position', 'absolute')
         .css('top', '292px')
         .css('left', '-97px')
-        .val('RGB')
+        .attr('placeholder', 'RGB')
         .appendTo($colorPickerPanel);
 
     $inputColor = $('<input/>')
@@ -74,6 +84,8 @@ $.fn.colorpicker = function() {
 
             $colorPickerPanel.show();
         });
+
+
 
 
 }
