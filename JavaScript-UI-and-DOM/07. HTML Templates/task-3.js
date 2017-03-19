@@ -1,9 +1,9 @@
-function solve(){
-  return function(){
-    $.fn.listview = function(data){
-      
+function solve() {
+    return function() {
+        $.fn.listview = function(data) {
+
+        };
     };
-  };
 }
 
 module.exports = solve;

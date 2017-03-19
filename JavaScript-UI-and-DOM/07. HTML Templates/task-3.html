@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Handlebars Task-3 ListView</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <ul id="books-list" data-template="book-item-template"></ul>
+
+    <script src="./bower_components/handlebars/handlebars.js"></script>
+    <script src="./bower_components/jQuery/dist/jquery.js"></script>
+
+    <script id="book-item-template" type="…">
+        <li class="book-item">
+            <a href="/#books/{{id}}">
+                <strong>{{title}}</strong>
+            </a>
+        </li>
+    </script>
+
+    <script src="task-3.js"></script>
+
+</body>
+
+</html>
