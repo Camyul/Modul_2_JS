@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Handlebars Task-2</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div id="hb-container"></div>
+
+    <script src="./bower_components/handlebars/handlebars.js"></script>
+    <script src="./bower_components/jQuery/dist/jquery.js"></script>
+    <script src="task-2.js"></script>
+    <script id="hb-template-container" type="text/Handlebars">
+        <h1>Animals</h1>
+        <ul>
+            {{#each animals}}
+            <li>
+                {{#if this.url}}
+                <a href={{this.url}}>See a {{this.name}}</a> {{else}}
+                <a href="http://cdn.playbuzz.com/cdn/3170bee8-985c-47bc-bbb5-2bcb41e85fe9/d8aa4750-deef-44ac-83a1-f2b5e6ee029a.jpg">No link for {{this.name}}, here is Batman!</a> {{/if}}
+            </li>
+            {{/each}}
+        </ul>
+    </script>
+    <script>
+        var func = solve();
+        func('#hb-container');
+    </script>
+</body>
+
+</html>
