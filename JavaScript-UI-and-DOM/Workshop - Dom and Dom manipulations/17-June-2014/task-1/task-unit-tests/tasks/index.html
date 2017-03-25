@@ -1,54 +1,63 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>Task 1 - JavaScript</title>	
+    <meta charset="UTF-8">
+    <title>Task 1 - JavaScript Image Preview</title>
+    <link rel="stylesheet" type="text/css" href="./task-1.css">
 </head>
+
 <body>
-	<div id="container">
-	</div>
-	<script src="task-1.js"></script>
-	<script type="text/javascript">
-		var animals = [{
-			title: 'Cats',
-			url: 'images/cats.jpg'
-		}, {
-			title: 'Cow',
-			url: 'images/cow.jpg'
-		}, {
-			title: 'Dogs',
-			url: 'images/dogs.jpg'
-		}, {
-			title: 'Еagle',
-			url: 'images/eagle.jpg'
-		}, {
-			title: 'Elephant',
-			url: 'images/elephant.jpg'
-		}, {
-			title: 'Hamster',
-			url: 'images/hamster.jpg'
-		}, {
-			title: 'Horse',
-			url: 'images/horse.jpg'
-		}, {
-			title: 'Lion',
-			url: 'images/lion.jpg'
-		}, {
-			title: 'Rabbits',
-			url: 'images/rabbits.jpg'
-		}, {
-			title: 'Rhinos',
-			url: 'images/rhinos.jpg'
-		}, {
-			title: 'Squirrel',
-			url: 'images/squirrel.jpg'
-		}, {
-			title: 'Tigers',
-			url: 'images/tigers.jpg'
-		}];
-		window.onload = function () {
-			solve()('#container', animals);
-		};
-	</script>
+    <div id="container">
+        <div>
+            <div>
+                <p>Test</p>
+            </div>
+        </div>
+    </div>
+    <script src="task-1.js"></script>
+    <script type="text/javascript">
+        var animals = [{
+            title: 'Cats',
+            url: 'images/cats.jpg'
+        }, {
+            title: 'Cow',
+            url: 'images/cow.jpg'
+        }, {
+            title: 'Dogs',
+            url: 'images/dogs.jpg'
+        }, {
+            title: 'Еagle',
+            url: 'images/eagle.jpg'
+        }, {
+            title: 'Elephant',
+            url: 'images/elephant.jpg'
+        }, {
+            title: 'Hamster',
+            url: 'images/hamster.jpg'
+        }, {
+            title: 'Horse',
+            url: 'images/horse.jpg'
+        }, {
+            title: 'Lion',
+            url: 'images/lion.jpg'
+        }, {
+            title: 'Rabbits',
+            url: 'images/rabbits.jpg'
+        }, {
+            title: 'Rhinos',
+            url: 'images/rhinos.jpg'
+        }, {
+            title: 'Squirrel',
+            url: 'images/squirrel.jpg'
+        }, {
+            title: 'Tigers',
+            url: 'images/tigers.jpg'
+        }];
+        window.onload = function() {
+            solve()('#container', animals);
+        };
+    </script>
 </body>
+
 </html>
