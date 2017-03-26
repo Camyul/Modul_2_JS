@@ -1,14 +1,36 @@
 ﻿<!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Task 3 - Handlebars</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div id="calendar"></div>
-    <script id="calendar-template" type='text/x-handlebars-template'>	
+    <script id="calendar-template" type='text/x-handlebars-template'>
         <!-- template here -->
+        <h2 class="header">Appointments for <span class="month">{{month}}</span> <span class="year">{{year}}</span></h2>
+        {{#days}}
+        <div class="col-date">
+            <div class="date">{{day}}</div>
+            <div class="events">
+                {{#each events}} {{#if title}}
+                <div class="event {{importance}}" title="{{comment}}">
+                    <div class="title">
+                        {{title}}
+                    </div>
+                    <div class="time">
+                        at {{time}}
+                    </div>
+                </div>
+                {{else}}
+                <div class="title">Free slot</div>
+                {{/if}} {{/each}}
+            </div>
+        </div>
+        {{/days}}
     </script>
     <script src="handlebars.js"></script>
     <script src="task-3.js"></script>
@@ -17,4 +39,5 @@
     </script>
     <script src="main.js"></script>
 </body>
+
 </html>
