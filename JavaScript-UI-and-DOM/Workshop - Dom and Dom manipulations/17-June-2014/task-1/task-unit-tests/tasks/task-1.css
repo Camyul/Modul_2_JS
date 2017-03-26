@@ -38,17 +38,20 @@
     margin-left: 15px;
 }
 
-strong h3 {
+h3 {
     display: flex;
     justify-content: center;
 }
 
 input {
-    width: 95%;
+    width: 85%;
 }
 
 ul {
     list-style-type: none;
+    display: flex;
+    align-items: center;
+    margin-left: -35px;
 }
 
 li {

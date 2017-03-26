@@ -46,11 +46,9 @@ function solve() {
                 imgContainer = document.createElement('ul'),
                 liTamplate = document.createElement('li');
 
-            rightStrong = document.createElement('strong');
             rightHeather = document.createElement('h4');
             rightHeather.innerHTML = items[i].title;
-            rightStrong.appendChild(rightHeather);
-            liTamplate.appendChild(rightStrong);
+            liTamplate.appendChild(rightHeather);
             tempImage.src = items[i].url;
             tempImage.alt = items[i].title;
             liTamplate.appendChild(tempImage);
@@ -96,9 +94,8 @@ function solve() {
             //console.log(searchedValue);
 
             for (let i = 0, len = liItems.length; i < len; i += 1) {
-                let nameImage = liItems[i].firstChild.alt;
-                console.log(nameImage);
-                console.log(nameImage);
+                let nameImage = liItems[i].firstChild.innerText.toLowerCase();
+                //console.log(nameImage);
                 if (nameImage.indexOf(searchedValue) < 0) {
                     liItems[i].style.display = 'none';
                 } else {
