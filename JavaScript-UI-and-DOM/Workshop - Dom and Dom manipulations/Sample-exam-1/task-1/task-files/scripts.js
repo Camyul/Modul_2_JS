@@ -5,7 +5,9 @@ function createCalendar(selector, events) {
         divHeather,
         divContent,
         DAYS_IN_MONTH = 30,
-        date = new Date('2014-06-01');
+        date = new Date('2014-06-01'),
+        options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' },
+        calendarDay;
 
     if (!selector) {
         throw new Error('Need a selector');
@@ -22,23 +24,31 @@ function createCalendar(selector, events) {
     divElement = document.createElement('div');
     divElement.style.width = '100px';
     divElement.style.height = '100px';
+    divElement.className += 'calendar-day';
 
     divHeather = document.createElement('div');
-    divHeather.style.height = '20%';
+    divHeather.style.height = '25%';
     divHeather.style.background = 'lightgray';
     divHeather.style.border = '1px solid black';
+    divHeather.style.fontSize = '10px';
 
     divContent = document.createElement('div');
-    divContent.style.height = '80%';
+    divContent.style.height = '75%';
     divContent.style.border = '1px solid black';
+
 
     divElement.appendChild(divHeather);
     divElement.appendChild(divContent);
 
+
+
     for (let i = 0; i < DAYS_IN_MONTH; i += 1) {
         divElement.id = i + 1;
-        date.setDate(i + 2);
-        divElement.firstChild.innerText = date.toString('dddd, mmmm, yyyy');
+        date.setDate(i + 1);
+        divElement.firstChild.innerText = date.toLocaleDateString("en-US", options);
+
+
+
         fragment.appendChild(divElement.cloneNode(true));
     }
 
@@ -48,6 +58,30 @@ function createCalendar(selector, events) {
         setEvent.lastChild.innerText = `${events[i].hour} ${events[i].title}`;
     }
 
-
     root.appendChild(fragment);
+
+    calendarDay = root.querySelectorAll('.calendar-day');
+    for (let i = 0, len = calendarDay.length; i < len; i += 1) {
+        calendarDay[i].addEventListener('mouseenter', function() {
+            this.firstChild.style.background = 'gray';
+        }, false);
+
+        calendarDay[i].addEventListener('mouseout', function() {
+            this.firstChild.style.background = 'lightgray';
+        }, false);
+
+        calendarDay[i].addEventListener('click', function() {
+
+            let clickedElement = root.querySelector('.clicked');
+            console.log(clickedElement);
+            if (clickedElement) {
+                clickedElement.style.background = '';
+                clickedElement.className = 'calendar-day';
+            }
+
+
+            this.style.background = 'cyan';
+            this.className += ' clicked';
+        }, false);
+    }
 }
