@@ -1,7 +1,18 @@
-.popup {
-    display: none;
-}
-
-.visible {
-    display: inline-block;
-}
+    .popup {
+        display: none;
+        box-shadow: 0 0 20px blue;
+        border-radius: 20px;
+        background-color: lightcoral;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 30px;
+        text-shadow: 0 0 10px white;
+    }
+    
+    .visible {
+        display: block;
+    }
+    
+    body {
+        display: flex;
+        justify-content: center;
+    }
