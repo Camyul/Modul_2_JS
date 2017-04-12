@@ -30,17 +30,17 @@ var data = (function() {
         return new Promise((resolve, reject) => {
             let username = userGetCurrent()
                 .then((username) => {
-                    let data = { title, username }
+                    let body = { title, username };
 
                     $.ajax({
                             type: 'POST',
                             url: 'api/threads',
-                            contentType: 'application/json',
-                            data: JSON.stringify(data)
-                        }).done((resolve) => resolve(data))
-                        .fail((reject) => reject(data))
+                            data: JSON.stringify(body),
+                            contentType: 'application/json'
+                        }).done((data) => resolve(data))
+                        .fail((data) => reject(data))
                 })
-        })
+        });
     }
 
     function threadById(id) {
@@ -53,19 +53,19 @@ var data = (function() {
 
     function threadsAddMessage(threadId, content) {
         return new Promise((resolve, reject) => {
-            let username = userGetCurrent()
+            userGetCurrent()
                 .then((username) => {
-                    let data = { content, username }
-
+                    let body = { content, username };
+                    console.log(content);
                     $.ajax({
                             type: 'POST',
                             url: `api/threads/${threadId}/messages`,
-                            contentType: 'application/json',
-                            data: JSON.stringify(data)
-                        }).done(resolve)
-                        .fail(reject);
+                            data: JSON.stringify(body),
+                            contentType: 'application/json'
+                        }).done((data) => resolve(data))
+                        .fail((data) => reject(data))
                 })
-        })
+        });
     }
     // end threads
 
@@ -75,13 +75,14 @@ var data = (function() {
 
         return new Promise((resolve, reject) => {
             $.ajax({
-                    type: "GET",
+                    type: 'GET',
                     url: REDDIT_URL,
                     dataType: 'jsonp',
-                    jsonpCallBack: "displayGallery"
+                    jsonpCollback: 'displayGallery'
                 }).done(resolve)
-                .fail(reject);
-        })
+                .fail(reject)
+        });
+
     }
     // end gallery
 
