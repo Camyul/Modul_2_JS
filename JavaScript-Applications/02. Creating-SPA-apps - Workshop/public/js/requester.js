@@ -16,7 +16,7 @@ let requester = {
             $ajax({
                 url,
                 method: 'GET',
-                contentType: 'application/JSON',
+                contentType: 'application/json',
                 success(response) {
                     resolve(response);
                 }
@@ -25,7 +25,32 @@ let requester = {
     },
     postJSON(url, body, options = {}) {
         let promise = new Promise((resolve, reject) => {
-
+            let headers = options.headers || {};
+            $ajax({
+                url,
+                headers,
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(body),
+                success(response) {
+                    resolve(response);
+                }
+            });
+        });
+    },
+    putJSON(url, body, options = {}) {
+        let promise = new Promise((resolve, reject) => {
+            let headers = options.headers || {};
+            $ajax({
+                url,
+                headers,
+                method: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(body),
+                success(response) {
+                    resolve(response);
+                }
+            });
         });
     }
 };
