@@ -4,6 +4,30 @@ const HTTP_HEATHER_KEY = 'x-auth-key',
 
 var dataService = {
 
+    cookies() {
+        return requester.getJSON('/api/cookies');
+    },
+
+    addCookie(cookie) {
+        let options = {
+            headers: {
+                [HTTP_HEATHER_KEY]: localStorage.getJSON('KEY_STORAGE_AUTH_KEY')
+            }
+        };
+
+        return requester.postJSON('/api/cookies', cookie, options);
+    },
+
+    rateCookie(cookieId, type) {
+        let options = {
+            headers: {
+                [HTTP_HEATHER_KEY]: localStorage.getJSON('KEY_STORAGE_AUTH_KEY')
+            }
+        };
+
+        return requester.putJSON('/api/cookies' + cookieId, { type }, options);
+    },
+
     login() {
         return requester.putJSON('/api/auth', user)
             .then((respUser) => {
