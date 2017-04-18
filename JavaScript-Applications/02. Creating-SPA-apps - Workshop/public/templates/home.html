@@ -1,0 +1,18 @@
+<h1>Cookies</h1>
+<ul class="list list-cookies">
+    {{#}}
+    <li data-id="{{id}}">
+        <span>Likes: <strong>{{}}</strong></span>
+        <span>Dislikes: <strong>{{}}</strong></span>
+        <div>
+            <a href="#" data-type="like" class="btn-like-dislike hidden-when-not-logged-in glyphicon glyphicon-thumbs-up"></a>
+            <a href="#" data-type="dislike" class="btn-like-dislike hidden-when-not-logged-in glyphicon glyphicon-thumbs-down"></a>
+        </div>
+        <br />
+        <p>Category: <a href="#/home?category={{}}">{{}}</a></p>
+        <br />
+        <img src="{{}}" />
+        <br />
+    </li>
+    {{/}}
+</ul>
