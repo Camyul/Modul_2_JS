@@ -17,14 +17,23 @@
 
 .list-cookies {
     list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#container {
+    width: 100%;
 }
 
 .list-cookies li {
     margin-top: 50px;
+    width: 350px;
 }
 
 .list-cookies li img {
-    height: 350px
+    width: 300px;
 }
 
 #page .hidden-when-not-logged-in {

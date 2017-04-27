@@ -100,8 +100,8 @@
       "text": "May the Force with you",
       "category": "WOrk",
       "userId": "16655985-e510-43d4-ad1c-2388c76d1ef6",
-      "likes": 35,
-      "dislikes": 11,
+      "likes": 37,
+      "dislikes": 12,
       "img": "https://dayinthelifeofapurpleminion.files.wordpress.com/2014/12/batman-exam.jpg",
       "shareDate": "2015-09-09T14:53:56.482Z",
       "id": "e2fdbf82-54c3-488f-add4-9af3262c2572",
@@ -132,7 +132,7 @@
       "passHash": "123456q",
       "userId": "14f0886a-26b3-45a1-98de-bce9fde7688c",
       "likes": 0,
-      "dislikes": 0,
+      "dislikes": 2,
       "img": "https://dayinthelifeofapurpleminion.files.wordpress.com/2014/12/batman-exam.jpg",
       "shareDate": "2016-09-26T17:29:51.206Z",
       "id": "593ab347-78f2-4069-9030-d7b628bec08d"
@@ -140,7 +140,7 @@
     {
       "text": "qwe",
       "userId": "14f0886a-26b3-45a1-98de-bce9fde7688c",
-      "likes": 0,
+      "likes": 2,
       "dislikes": 0,
       "img": "https://dayinthelifeofapurpleminion.files.wordpress.com/2014/12/batman-exam.jpg",
       "shareDate": "2016-09-26T18:34:45.542Z",
@@ -154,15 +154,6 @@
       "img": "https://dayinthelifeofapurpleminion.files.wordpress.com/2014/12/batman-exam.jpg",
       "shareDate": "2016-09-26T18:35:03.006Z",
       "id": "6f12561e-e5e5-4918-877c-7e938c127850"
-    },
-    {
-      "text": "Coockie",
-      "img": "Cooc",
-      "userId": "78824469-872d-4fc3-93a3-b7cc49953b11",
-      "likes": 0,
-      "dislikes": 0,
-      "shareDate": "2017-04-16T15:32:10.469Z",
-      "id": "7eb86a8c-109f-4ad7-be40-954d6f7fe8be"
     },
     {
       "text": "Boot",
@@ -186,7 +177,7 @@
       "text": "Boot2",
       "img": "http://themecrunch.com/wp-content/uploads/2013/04/bootstrap-buttons_thumb.jpg",
       "userId": "e6c5092f-0bc4-4037-b33d-540d1c16ac13",
-      "likes": 0,
+      "likes": 1,
       "dislikes": 0,
       "shareDate": "2017-04-27T16:46:51.025Z",
       "id": "c8fc458e-72b6-4f70-b871-d580f0631a2d"

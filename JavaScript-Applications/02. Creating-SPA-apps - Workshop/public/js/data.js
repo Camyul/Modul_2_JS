@@ -21,11 +21,11 @@ var dataService = {
     rateCookie(cookieId, type) {
         let options = {
             headers: {
-                [HTTP_HEATHER_KEY]: localStorage.getJSON('KEY_STORAGE_AUTH_KEY')
+                [HTTP_HEATHER_KEY]: localStorage.authKey
             }
         };
 
-        return requester.putJSON('/api/cookies' + cookieId, { type }, options);
+        return requester.putJSON('/api/cookies/' + cookieId, { type }, options);
     },
 
     login(user) {

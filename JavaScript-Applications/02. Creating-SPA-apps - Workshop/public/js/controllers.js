@@ -19,11 +19,12 @@ let controllers = {
                         $('#container').html(html);
 
                         $('.btn-like-dislike').on('click', function(ev) {
-                            let type = $('this').attr('data-type'),
-                                cookieId = $('this').parents('li').attr('data-id');
+                            //debugger;
+                            let type = $(this).attr('data-type'),
+                                cookieId = $(this).parents('li').attr('data-id');
 
-                            console.log(type);
-                            console.log(cookieId);
+                            //console.log(type);
+                            //console.log(cookieId);
                             dataService.rateCookie(cookieId, type)
                                 .then(); //Someting...
                         });
