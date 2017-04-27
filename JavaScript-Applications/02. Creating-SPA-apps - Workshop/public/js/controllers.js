@@ -25,7 +25,7 @@ let controllers = {
                             console.log(type);
                             console.log(cookieId);
                             dataService.rateCookie(cookieId, type)
-                                .then() //Someting...
+                                .then(); //Someting...
                         });
                     });
             },
@@ -62,21 +62,20 @@ let controllers = {
                         if (isLoggedIn) {
                             window.location('#/home');
                             return;
-                        };
+                        }
 
                         templates.get('login')
                             .then((templateHtml) => {
                                 let templateFunk = handlebars.compile(templateHtml),
-                                    html = templateFunk(cookies);
+                                    html = templateFunk();
 
                                 $('#container').html(html);
 
                                 $('btn-login').on('click', (ev) => {
-                                    let users = {
+                                    let user = {
                                         username: $('tb-username').val(),
                                         passHash: $('tb-password').val()
                                     };
-
                                     dataService.login(user)
                                         .then((respUser) => {
                                             $(document.body).addClass('logged-in');
@@ -89,7 +88,7 @@ let controllers = {
                                 });
 
                                 $('btn-register').on('click', (ev) => {
-                                    let users = {
+                                    let user = {
                                         username: $('tb-username').val(),
                                         passHash: $('tb-password').val()
                                     };

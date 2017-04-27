@@ -1,6 +1,6 @@
-<h1>Cookies</h1>
+<h1>Cookies!</h1>
 <ul class="list list-cookies">
-    {{#result}}
+    {{#each result}}
     <li data-id="{{id}}">
         <h3>{{text}}</h3>
         <span>Likes: <strong>{{likes}}</strong></span>
@@ -15,5 +15,5 @@
         <img src="{{img}}" />
         <br />
     </li>
-    {{/result}}
+    {{/each}}
 </ul>

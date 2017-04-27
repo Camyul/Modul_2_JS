@@ -3,8 +3,8 @@ let router = new Navigo(null, true);
 let controllersInstance = controllers.get(dataService, templates);
 
 router
-    .on('login', controllersInstance.login())
-    .on('home', controllersInstance.home())
+    .on('login', controllersInstance.login)
+    .on('home', controllersInstance.home)
     .on("my-cookie", controllersInstance.myCookie)
     .on("cookie-add", controllersInstance.addCookie)
     .on(() => {

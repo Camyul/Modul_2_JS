@@ -28,8 +28,9 @@ var dataService = {
         return requester.putJSON('/api/cookies' + cookieId, { type }, options);
     },
 
-    login() {
-        return requester.putJSON('/api/auth', user)
+    login(user) {
+        console.log(user);
+        return requester.putJSON('api/auth', user)
             .then((respUser) => {
                 localStorage.setItem('username', respUser.result.username);
                 localStorage.setItem('authKey', respUser.result.authKey);
@@ -37,6 +38,8 @@ var dataService = {
     },
 
     register(user) {
+        console.log(user);
+
         return requester.postJSON('/api/users', user);
     },
 
