@@ -11,7 +11,7 @@ var dataService = {
     addCookie(cookie) {
         let options = {
             headers: {
-                [HTTP_HEATHER_KEY]: localStorage.getJSON('KEY_STORAGE_AUTH_KEY')
+                [HTTP_HEATHER_KEY]: localStorage.authKey
             }
         };
 
@@ -29,8 +29,7 @@ var dataService = {
     },
 
     login(user) {
-        console.log(user);
-        return requester.putJSON('api/auth', user)
+        return requester.putJSON('/api/auth', user)
             .then((respUser) => {
                 localStorage.setItem('username', respUser.result.username);
                 localStorage.setItem('authKey', respUser.result.authKey);
@@ -38,8 +37,6 @@ var dataService = {
     },
 
     register(user) {
-        console.log(user);
-
         return requester.postJSON('/api/users', user);
     },
 

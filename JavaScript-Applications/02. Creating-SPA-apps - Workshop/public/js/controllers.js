@@ -34,7 +34,7 @@ let controllers = {
                 console.log('My Cookie');
             },
 
-            addCookie() {
+            addCookie(cookies) {
                 templates.get('cookie-add')
                     .then((templateHtml) => {
                         let templateFunk = handlebars.compile(templateHtml),
@@ -42,15 +42,14 @@ let controllers = {
 
                         $('#container').html(html);
 
-                        $('btn-add').on('click', () => {
+                        $('#btn-add').on('click', () => {
                             var cookie = {
                                 text: $("#tb-text").val(),
                                 img: $("#tb-img-url").val(),
                             };
-
                             dataService.addCookie(cookie)
                                 .then(() => {
-                                    window.location('#/home')
+                                    window.location.replace('#/home')
                                 });
                         });
                     });
@@ -63,7 +62,6 @@ let controllers = {
                             window.location('#/home');
                             return;
                         }
-
                         templates.get('login')
                             .then((templateHtml) => {
                                 let templateFunk = handlebars.compile(templateHtml),
@@ -71,32 +69,32 @@ let controllers = {
 
                                 $('#container').html(html);
 
-                                $('btn-login').on('click', (ev) => {
+                                $('#btn-login').on('click', (ev) => {
                                     let user = {
-                                        username: $('tb-username').val(),
-                                        passHash: $('tb-password').val()
+                                        username: $('#tb-username').val(),
+                                        passHash: $('#tb-password').val()
                                     };
                                     dataService.login(user)
                                         .then((respUser) => {
                                             $(document.body).addClass('logged-in');
-                                            window.location('#/home');
+                                            window.location.replace('#/home');
                                         });
 
-                                    ev.preventDafault();
+                                    ev.preventDafault;
 
                                     return false;
                                 });
 
-                                $('btn-register').on('click', (ev) => {
+                                $('#btn-register').on('click', (ev) => {
                                     let user = {
-                                        username: $('tb-username').val(),
-                                        passHash: $('tb-password').val()
+                                        username: $('#tb-username').val(),
+                                        passHash: $('#tb-password').val()
                                     };
 
                                     dataService.register(user)
                                         .then((respUser) => {
                                             $(document.body).addClass('logged-in');
-                                            window.location('#/home');
+                                            window.location.replace('#/home');
                                         });
 
                                     ev.preventDafault();

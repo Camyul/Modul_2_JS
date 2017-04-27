@@ -20,14 +20,14 @@ dataService.isLoggedIn()
         }
     });
 
-$('btn-nav-logout').on('click', () => {
+$('.btn-nav-logout').on('click', () => {
     dataService.logout()
         .then(() => {
             $(document.body).removeClass("logged-in");
         });
 });
 
-$('main-nav').on('click', 'li', (ev) => {
+$('#main-nav').on('click', 'li', (ev) => {
     $("#main-nav .active").removeClass("active");
     $(this).addClass('active');
 });

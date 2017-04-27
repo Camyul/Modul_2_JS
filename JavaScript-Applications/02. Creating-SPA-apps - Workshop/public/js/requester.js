@@ -38,7 +38,7 @@ let requester = {
                 headers,
                 method: "POST",
                 contentType: "application/json",
-                data: body,
+                data: JSON.stringify(body),
                 success(response) {
                     resolve(response);
                 }
