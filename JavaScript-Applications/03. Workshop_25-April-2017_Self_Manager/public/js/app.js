@@ -26,3 +26,14 @@ $('.btn-nav-logout').on('click', () => {
             $(document.body).removeClass('logged-in');
         });
 });
+
+$("#main-nav").on("click", "li", function(ev) {
+    $("#main-nav .active").removeClass("active");
+    $(this).addClass("active");
+});
+
+$(function() {
+    $("#main-nav .active").removeClass("active");
+    let $currentPageNavButton = $(`#main-nav a[href="${window.location.hash}"]`).parents("li");
+    $currentPageNavButton.addClass("active");
+});

@@ -20,6 +20,11 @@
     display: none;
 }
 
+#btn-add-todo {
+    margin-top: 20px;
+    width: 200px;
+}
+
 
 /*.list-cookies {
     list-style-type: none;
