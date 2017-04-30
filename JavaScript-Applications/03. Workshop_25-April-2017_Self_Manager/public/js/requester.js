@@ -47,12 +47,16 @@ let requester = {
         return promise;
     },
 
-    getJSON(url) {
+    getJSON(url, options) {
+        options = options || {};
+        let headers = options.headers || {};
+
         let promise = new Promise((resolve, reject) => {
             $.ajax({
                 url,
                 method: 'GET',
                 contentType: 'application/json',
+                headers: headers,
                 success(response) {
                     resolve(response);
                 }

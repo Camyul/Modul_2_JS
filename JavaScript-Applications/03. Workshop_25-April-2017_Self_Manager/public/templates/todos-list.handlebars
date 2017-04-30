@@ -1,0 +1,19 @@
+<h2>TODOs</h2>
+<a href="#/todos">Add new</a> 
+{{#this}}
+<div class="todo-container">
+    <small><a href="#" class="btn-cancel">X</a></small>
+<h3><a href="#/todos?category={{category}}">{{category}}</a></h3>
+
+<div class="todo-box" data-id="{{id}}">
+    <label class="checkbox">
+        {{#if state}}
+        <input class="check" type="checkbox" checked>
+        {{else}}
+        <input class="check" type="checkbox" />
+        {{/if}}
+        <strong>{{text}}</strong>
+    </label>
+</div>
+</div>
+{{/this}} 

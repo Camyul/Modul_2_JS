@@ -25,15 +25,42 @@
     width: 200px;
 }
 
-
-/*.list-cookies {
-    list-style-type: none;
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.list-cookies li {
-    margin-top: 50px;
+.todo-container {
+    margin: 15px;
+    width: 300px;
+    background-color: lightgray;
+    border-radius: 15px;
+    box-shadow: 0 0 10px red;
 }
 
-.list-cookies li img {
-    height: 350px
-}*/
+.events-container {
+    margin: 15px;
+    width: 300px;
+    background-color: lightgray;
+    border-radius: 15px;
+    box-shadow: 0 0 10px red;
+}
+
+.btn-cancel {
+    display: none;
+}
+
+.events-container:hover .btn-cancel {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 15px;
+    color: black;
+}
+
+.todo-container:hover .btn-cancel {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 15px;
+    color: black;
+}

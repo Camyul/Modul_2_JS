@@ -84,7 +84,254 @@
       "passHash": "rr",
       "usernameLower": "rr",
       "authKey": "undefinedFvWKqW+nxie@%tlKeGvCWuY_WcHbTnjKVgWVwU(k=(TXZejXD%z",
-      "id": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+      "id": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+      "todos": [
+        {
+          "id": 68179,
+          "text": "Test",
+          "state": false,
+          "category": "Test TODO"
+        },
+        {
+          "id": 368623,
+          "text": "Test",
+          "state": false,
+          "category": "Test TODO"
+        },
+        {
+          "id": 471946,
+          "text": "Test2",
+          "state": true,
+          "category": "Test"
+        }
+      ],
+      "events": [
+        {
+          "id": 663468,
+          "title": "Event 1",
+          "category": "Test 1",
+          "date": null,
+          "creatorId": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+          "users": [
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+          ]
+        },
+        {
+          "id": 962374,
+          "title": "defadsfa",
+          "category": "ewqew",
+          "date": null,
+          "creatorId": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+          "users": [
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+          ]
+        },
+        {
+          "id": 962374,
+          "title": "defadsfa",
+          "category": "ewqew",
+          "date": null,
+          "creatorId": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+          "users": [
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+          ]
+        },
+        {
+          "id": 49693,
+          "title": "aafdgsfdg",
+          "category": "fdsafa",
+          "date": null,
+          "creatorId": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+          "users": [
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+          ]
+        },
+        {
+          "id": 49693,
+          "title": "aafdgsfdg",
+          "category": "fdsafa",
+          "date": null,
+          "creatorId": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+          "users": [
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+          ]
+        },
+        {
+          "id": 229072,
+          "title": "Exact",
+          "category": "Vse Taq",
+          "date": null,
+          "creatorId": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+          "users": [
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+          ]
+        },
+        {
+          "id": 229072,
+          "title": "Exact",
+          "category": "Vse Taq",
+          "date": null,
+          "creatorId": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+          "users": [
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+          ]
+        },
+        {
+          "id": 634396,
+          "title": "New",
+          "category": "News",
+          "date": null,
+          "creatorId": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+          "users": [
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+          ]
+        },
+        {
+          "id": 634396,
+          "title": "New",
+          "category": "News",
+          "date": null,
+          "creatorId": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+          "users": [
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+          ]
+        },
+        {
+          "id": 756750,
+          "title": "TTTt",
+          "category": "RRR",
+          "date": null,
+          "creatorId": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+          "users": [
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+          ]
+        },
+        {
+          "id": 756750,
+          "title": "TTTt",
+          "category": "RRR",
+          "date": null,
+          "creatorId": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+          "users": [
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+          ]
+        },
+        {
+          "id": 846359,
+          "title": "Again",
+          "category": "Agg",
+          "date": null,
+          "creatorId": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+          "users": [
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+          ]
+        },
+        {
+          "id": 663468,
+          "title": "Event 1",
+          "category": "Test 1",
+          "date": null,
+          "creatorId": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+          "users": [
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+          ]
+        },
+        {
+          "id": 846359,
+          "title": "Again",
+          "category": "Agg",
+          "date": null,
+          "creatorId": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+          "users": [
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+          ]
+        },
+        {
+          "id": 421844,
+          "title": "Последен Тест",
+          "category": "Последно",
+          "description": "Ра\nбо\nти",
+          "date": null,
+          "creatorId": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+          "users": [
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+          ]
+        },
+        {
+          "id": 421844,
+          "title": "Последен Тест",
+          "category": "Последно",
+          "description": "Ра\nбо\nти",
+          "date": null,
+          "creatorId": "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+          "users": [
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d",
+            "0dfb6c6b-2fc3-421e-b725-b60bc1dca43d"
+          ]
+        }
+      ]
+    },
+    {
+      "username": "ivan",
+      "passHash": "1234",
+      "usernameLower": "ivan",
+      "authKey": "undefinedsiIo#jeN(a_GOs%h)A^EoB)jo&EtncHWoVvu^FyrzPisHaRmsyl",
+      "id": "38aa62c0-a2c3-46d1-a4bd-c790df47f951",
+      "events": [
+        {
+          "id": 139604,
+          "title": "Next",
+          "category": "Nees",
+          "description": "Foio",
+          "date": null,
+          "creatorId": "38aa62c0-a2c3-46d1-a4bd-c790df47f951",
+          "users": [
+            "38aa62c0-a2c3-46d1-a4bd-c790df47f951",
+            "38aa62c0-a2c3-46d1-a4bd-c790df47f951"
+          ]
+        },
+        {
+          "id": 139604,
+          "title": "Next",
+          "category": "Nees",
+          "description": "Foio",
+          "date": null,
+          "creatorId": "38aa62c0-a2c3-46d1-a4bd-c790df47f951",
+          "users": [
+            "38aa62c0-a2c3-46d1-a4bd-c790df47f951",
+            "38aa62c0-a2c3-46d1-a4bd-c790df47f951"
+          ]
+        }
+      ],
+      "todos": [
+        {
+          "id": 210548,
+          "text": "New",
+          "state": false,
+          "category": "New"
+        },
+        {
+          "id": 236652,
+          "text": "Next",
+          "state": false,
+          "category": "Doo"
+        }
+      ]
     }
   ]
 }
