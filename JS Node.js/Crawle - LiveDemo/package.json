@@ -1,0 +1,11 @@
+{
+  "name": "crawlre",
+  "version": "1.0.0",
+  "descrition": "",
+  "main": "index.js",
+  "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
+    "jquery": "^3.2.1",
+    "jsdom": "^11.0.0"
+  }
+}
