@@ -1,6 +1,7 @@
 //require('./movies.extensions');
 //require('./categories.extensions');
 
+// Автоматично добавя require на файлове с допълнение '.extensions'
 const path = require('path');
 
 require('fs')

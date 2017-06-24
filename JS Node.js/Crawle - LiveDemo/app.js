@@ -8,21 +8,52 @@ const genres = ['animation', 'action',
     'horror', 'adventure',
 ];
 
-const { Movie } = require('./models/movie.model');
+const { parseGenre } = require('./parsers/genre.parser');
+
+const { parseMovie } = require('./parsers/movie.parser');
+
 
 require('./models/extentions');
 
-const { parseGenre } = require('./parsers/genre.parser');
-
-genres.forEach((genre) => {
-    const url = genresUrlBase + genre;
-    parseGenre(url)
-        .then((g) => {
-            console.log(g.name);
-        });
-});
-
+// const moviesIds = [];
 const movies = [];
+
+const loadMovie = (queue) => {
+    if (queue.isEmpty()) {
+        return Promise.resolve();
+    }
+    const id = queue.pop();
+    const url = 'http://www.imdb.com/title/' + id;
+    return parseMovie(url)
+        .then((movie) => {
+            movies.push(movie);
+            return loadMovie(queue);
+        });
+}
+
+const loadMovies = (queue) => {
+    const PARALEL_LOADS = 64;
+    return Promise.all(
+            Array.from({ length: PARALEL_LOADS })
+            .map((_) => loadMovie(queue)))
+        .then(() => {
+            console.log(movies);
+        });
+};
+
+const queue = require('./queue').getQueue();
+
+Promise.all(
+        genres.map((genre) => {
+            const url = genresUrlBase + genre;
+            return parseGenre(url)
+                .then((g) => {
+                    queue.pushMany(...g.moviesIds);
+                });
+        }))
+    .then(() => {
+        return loadMovies(queue);
+    });
 
 //get the movies and get movies data
 
