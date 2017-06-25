@@ -5,5 +5,7 @@ module.exports = {
         TITLE_SELECTOR: '.title',
         POSTER_IMG_URL: '.itemonly img',
         DESCRIPTION: '.itemonly p',
+        PRICE: '.price',
+        PRODUCT_ID: '.item a',
     },
 };

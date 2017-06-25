@@ -18,6 +18,9 @@ Product.fromHtml = (html) => {
             // title = title.substring(0, title.indexOf('&nbsp;<span '));
             const posterUrl = $(DETAILS.POSTER_IMG_URL).attr('src');
             const description = $(DETAILS.DESCRIPTION).html();
-            return new Product(title, posterUrl, description);
+            let price = $(DETAILS.PRICE).text();
+            price = price.substr(5, 6);
+            price = (parseFloat(price) / 100).toFixed(2);
+            return new Product(title, posterUrl, description, price);
         });
 };

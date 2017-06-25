@@ -14,12 +14,14 @@ Category.fromHtml = (html) => {
         .then(($) => {
             const name = '';
             const ids = [];
-            $('.item a')
+            $(DETAILS.PRODUCT_ID)
                 .each((_, el) => {
                     const href = $(el).attr('href');
                     const id = href.substr(3, PRODUCT_ID_LENGTH);
                     if (isFinite(id)) {
-                        ids.push(id);
+                        if (!ids.find((x) => x === id)) {
+                            ids.push(id);
+                        }
                     }
                 });
             return new Category(name, ids);
