@@ -39,6 +39,9 @@ const loadProducts = (queue) => {
         .then(() => {
             products.forEach((x) => {
                 console.log(x.title);
+                console.log(x.price);
+                console.log(x.description);
+                console.log(x.productImgUrl);
             });
             console.log(products.length);
         });
