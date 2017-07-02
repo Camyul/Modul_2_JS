@@ -1,5 +1,3 @@
-/* eslint linebreak-style: ["error", "windows"]*/
-
 require('./polyfills');
 
 // get the movies and add them to a queue
