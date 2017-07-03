@@ -1,5 +1,3 @@
-const express = require('express');
+const app = require('./app');
 
-const app = express();
-
-app.listen(3001);
+app.listen(3001, () => console.log('Magic happen at: 3001'));
