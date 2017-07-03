@@ -12,19 +12,11 @@ const attach = (app) => {
     const router = new Router();
 
     router.get('/', (req, res) => {
-        res
-            .status(404)
-            .send('<h1>Home</h1>');
-    }).get('/json', (req, res) => {
-        res.send({
-            id: 1,
-            name: 'Gosho',
-            interests: ['Math', 'JS'],
-        });
-    }).get('/all', (req, res) => {
-        res.render('all', {
+        res.render('items/all', {
             model: items,
         });
+    }).get('/form', (req, res) => {
+        return res.render('items/form');
     }).get('/:id', (req, res) => {
         const id = parseInt(req.params.id, 10);
         const item = items.find((i) => i.id === id);
@@ -32,11 +24,16 @@ const attach = (app) => {
             return res.redirect('/404');
         }
 
-        return res.render('details', {
+        return res.render('items/details', {
             model: item,
         });
+    }).post('/', (req, res) => {
+        const item = req.body;
+        item.id = items.length + 1;
+        items.push(item);
+        return res.redirect('items');
     });
-    app.use('/', router);
+    app.use('/items', router);
 };
 
 module.exports = attach;

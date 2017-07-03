@@ -1,0 +1,10 @@
+extends ../../shared/_master
+include _subnav
+
+block head_scripts
+    script(src="/static/js/all.js")
+
+    block body
+        +subnav
+
+        block content

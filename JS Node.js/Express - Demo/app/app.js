@@ -8,6 +8,10 @@ app.get('/404', (req, res) => {
     return res.send('<h1>Error</h1>');
 });
 
+app.get('/', (req, res) => {
+    return res.render('home');
+});
+
 require('./routes')(app);
 
 app.get('*', (req, res) => {

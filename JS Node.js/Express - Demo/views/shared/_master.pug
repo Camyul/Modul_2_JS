@@ -1,3 +1,5 @@
+include _nav
+
 <!DOCTYPE html>
 html(lang="en")
 head
@@ -7,7 +9,13 @@ head
     link(rel="stylesheet", href="/libs/bootstrap/dist/css/bootstrap.min.css")
     link(rel="stylesheet", href="/static/css/main.css")
     block styles
-    block scripts
+    block head_scripts
     title Demo Express
 body
+    .nav
+        +nav
+    if err
+        h1
+            =err
     block body
+    block body_end_scripts

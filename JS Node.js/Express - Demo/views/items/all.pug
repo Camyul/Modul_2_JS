@@ -1,13 +1,10 @@
 extends shared/_master
 
-block scripts
-    script(src="/static/js/all.js")
-
-block body
+block content
     h1
         | All
     ul
         each item in model
             li
-                a(href="/" + item.id)
+                a(href="/items/" + item.id)
                     | Go to #{item.name}
