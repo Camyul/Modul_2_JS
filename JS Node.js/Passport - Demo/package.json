@@ -1,12 +1,14 @@
 {
-  "name": "",
-  "version": "",
-  "dependencies": {
-    "body-parser": "^1.17.2",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.15.3",
-    "express-session": "^1.15.3",
-    "passport": "^0.3.2",
-    "passport-local": "^1.0.0"
-  }
+    "name": "",
+    "version": "",
+    "dependencies": {
+        "body-parser": "^1.17.2",
+        "cookie-parser": "^1.4.3",
+        "express": "^4.15.3",
+        "express-session": "^1.15.3",
+        "passport": "^0.3.2",
+        "passport-github2": "^0.1.10",
+        "passport-local": "^1.0.0",
+        "save": "^2.3.1"
+    }
 }

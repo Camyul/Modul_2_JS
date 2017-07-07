@@ -20,7 +20,8 @@ passport.deserializeUser((userId, done) => {
         .catch((error) => done(error, false));
 });
 
-require('./local-strategy')(passport);
+require('./local-strategy')(passport, data);
+require('./github-strategy')(passport, data);
 
 module.exports = (app) => {
     app.use(passport.initialize());

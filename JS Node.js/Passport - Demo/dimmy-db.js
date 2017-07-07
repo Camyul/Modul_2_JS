@@ -21,4 +21,18 @@ module.exports = {
 
         return Promise.resolve(user);
     },
+    createUser(user) {
+        const lastId = db[db.length - 1].id;
+
+        user.id = lastId + 1;
+
+        db.push(user);
+
+        return Promise.resolve(user);
+    },
+    findByGithubId(githubId) {
+        const user = db.find((x) => x.githubId === githubId);
+
+        return Promise.resolve(user);
+    },
 };
