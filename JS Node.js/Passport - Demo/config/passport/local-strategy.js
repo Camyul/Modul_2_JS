@@ -13,4 +13,4 @@ const authStrategy = new LocalStrategy((username, password, done) => {
         .catch((error) => done(error, false));
 });
 
-module.exports = authStrategy;
+module.exports = (passport) => passport.use(authStrategy);

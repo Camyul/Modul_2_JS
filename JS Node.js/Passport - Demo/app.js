@@ -4,10 +4,10 @@ const express = require('express');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const passport = require('passport');
+// const passport = require('passport');
 // const LocalStrategy = require('passport-local');
 // const data = require('./dimmy-db');
-const { Router } = require('express');
+// const { Router } = require('express');
 
 const app = express();
 
@@ -56,7 +56,7 @@ passport.deserializeUser((userId, done) => {
 app.use(passport.session());*/
 
 // attach routers
-const router = new Router();
+/* const router = new Router();
 
 router
     .get('/login', (req, res) => {
@@ -95,6 +95,6 @@ router
         res.status(200).send('<h1>Wa Wa!</h1>');
     });
 
-app.use(router);
+app.use(router);*/
 
 app.listen(PORT, () => console.log(`Magic happening at http://localhost:${PORT}`));
