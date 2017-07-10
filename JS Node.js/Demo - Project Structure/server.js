@@ -2,10 +2,12 @@ const async = () => {
     return Promise.resolve();
 };
 
+const config = require('./config');
 
-async().then(() => require('./db').init())
+async().then(() => require('./db').init(config.connectionString))
     .then((db) => require('./data').init(db))
     .then((data) => require('./app').init(data))
     .then((app) => {
-        app.listen(3001, () => console.log('It Works at: 3001'));
+        app.listen(config.port,
+            () => console.log(`It Works at: ${config.port}`));
     });

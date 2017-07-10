@@ -1,21 +1,9 @@
-class Data {
-    constructor(db, ModelClass) {
-        db.collection('');
-    }
-
-    getAll() {
-
-    }
-
-    create(model) {
-
-    }
-}
+const ItemsData = require('./items.data');
 
 const init = (db) => {
-    return {
-        items: new Data(db, Item),
-    };
+    return Promise.resolve({
+        items: new ItemsData(db),
+    });
 };
 
 module.exports = { init };
